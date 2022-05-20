@@ -2,9 +2,9 @@ import db from "../db.js";
 import bcrypt from "bcrypt";
 
 export async function LoginMiddleware(req, res, next) {
-  let { email, password } = req.body;
+  let infosUser = req.body;
 
-  if (!password || !email || !req.body) {
+  if (!infosUser.password || !infosUser.email || !req.body) {
     return res.sendStatus(422);
   }
 

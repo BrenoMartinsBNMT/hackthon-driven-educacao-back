@@ -16,5 +16,9 @@ export async function GetExams(req, res) {
 
   let exams = await db.collection("exams").find({});
 
+  if (!exams) {
+    res.send("Ainda não temos nemhuma pergunta :(");
+  }
+
   res.send(exams);
 }

@@ -1,12 +1,12 @@
 import express, { json } from "express";
 import cors from "cors";
-import authRoutes from "./routers/authRouters.js";
+import Authrouter from "./routers/authRouters";
 
 const app = express();
 
 app.use(json());
 app.use(cors());
-app.use(authRoutes);
+app.use(Authrouter);
 
 app.get("/", (req, res) => {
   res.send("api funcionando");

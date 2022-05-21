@@ -13,12 +13,13 @@ export async function GetExams(req, res) {
   if (!hasloged) {
     return res.sendStatus(401);
   }
-
+  let {email}
+  let {username} = db.collection('signUp').findOne({email})
   let exams = await db.collection("exams").find({});
 
   if (!exams) {
     res.send("Ainda não temos nemhuma pergunta :(");
   }
 
-  res.send(exams);
+  res.send(exams,username);
 }

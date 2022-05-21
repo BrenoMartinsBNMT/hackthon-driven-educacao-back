@@ -8,9 +8,9 @@ export async function LoginMiddleware(req, res, next) {
     return res.sendStatus(422);
   }
   let { email } = infosUser;
-  let { password } = await db.collection("SignUp").findOne({ email });
+  let loginUser = await db.collection("SignUp").findOne({ email });
 
-  if (!bcrypt.compareSync(password, infosUser.password)) {
+  if (!bcrypt.compareSync(loginUser.password, infosUser.password)) {
     return res.send(401);
   }
 

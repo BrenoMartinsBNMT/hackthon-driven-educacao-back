@@ -2,6 +2,7 @@ import db from "../db.js";
 
 export async function GetExams(req, res) {
   let infosUser = req.params;
+
   if (!infosUser) {
     return res.sendStatus(422);
   }
@@ -13,13 +14,13 @@ export async function GetExams(req, res) {
   if (!hasloged) {
     return res.sendStatus(401);
   }
-  let {email}
-  let {username} = db.collection('signUp').findOne({email})
-  let exams = await db.collection("exams").find({});
+  let { email } = hasloged;
+  let { username } = await db.collection("signUp").findOne({ email });
+  let exams = await db.collection("exams").find({}).toArray();
 
   if (!exams) {
     res.send("Ainda não temos nemhuma pergunta :(");
   }
-
-  res.send(exams,username);
+  let gambiarra = { exams, username };
+  res.send(gambiarra);
 }

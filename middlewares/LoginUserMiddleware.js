@@ -7,10 +7,12 @@ export async function LoginMiddleware(req, res, next) {
   if (!infosUser.password || !infosUser.email || !req.body) {
     return res.sendStatus(422);
   }
-  let { password } = infosUser;
-  let loginUser = await db.collection("SignUp").find({ password });
 
-  if (!bcrypt.compareSync(loginUser.password, password)) {
+  let { email, password } = infosUser;
+  console.log(email);
+  let loginUser = await db.collection("signUp").findOne({ email });
+
+  if (!bcrypt.compareSync(password, loginUser.password)) {
     return res.send(401);
   }
 
